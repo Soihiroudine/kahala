@@ -1,7 +1,3 @@
-# Nom : Moussa
-# Prénom : Soihiroudine
-# Numéro étudiant : 41000462
-# Licence 2 Informatique
 
 import random as r
 
