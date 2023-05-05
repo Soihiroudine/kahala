@@ -1,4 +1,3 @@
-
 import random as r
 
 class Kahala:
@@ -143,6 +142,3 @@ class Kahala:
                 if indiceAdverse == 6:
                     position = 0
                     indiceAdverse = 0
-
-
-

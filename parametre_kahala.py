@@ -1,4 +1,3 @@
-   
 import random as r
 import time
 from Joueur import Joueur
