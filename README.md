@@ -28,7 +28,7 @@ Bien sur il faut que python soit installer dans votre machine.
     --- Joueur B  choisi entre 1 à 6 :
 ```
 
-## <span style="color:#af0654; font-weight:bold;">Probleme</span>
+## Probleme
 
 Le jeu n'est pas totalement fini. Il menque l'implementation de l'algorithme minMax. Le niveau trois de l'inteligence de l'ordinateur.
 
