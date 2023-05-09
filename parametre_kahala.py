@@ -39,18 +39,11 @@ class Jeu:
         return (self.indice < 1) or (self.indice > 6)  # type: ignore
     
     def uneBonneSaisie(self, humain):
-        # Une methode qui permet au joueur de selectionner une case
-        # Cette Methode verifie que le joueur : 
-        # - 1. choisir un nombre entier
-        # - 2. Que le nombre est entre 1 et 6 (6 compris)
-        # - 3. Que la case selectionner a au minimum 1 graine
         if humain:
             while True:
                 try:
                     print(f"--- {self.game.joueur[self.game.tourJoueur()].getName()} ", end=" ")
                     self.indice = input("choisi entre 1 à 6 : ")
-                    if self.indice == "quitter":
-                        return 0
                     self.indice = int(self.indice)
                 except ValueError:
                     # 1 - choisir un nombre entier
@@ -253,8 +246,7 @@ class Jeu:
                 # Si ce n'est pas un nombre entier : il lui redemande 
                 # Si le chiffre n'est pas compris entre 1 et 6 : il lui redemande
 
-                if self.uneBonneSaisie(self.game.joueur[self.game.tourJoueur()].getHumain()) == 0:
-                    break
+                self.uneBonneSaisie(self.game.joueur[self.game.tourJoueur()].getHumain())
                 
                 # Affichage de la case que le joueur a choisi
                 print(f"{self.game.joueur[self.game.tourJoueur()].getName()} a choisi : {self.indice}")

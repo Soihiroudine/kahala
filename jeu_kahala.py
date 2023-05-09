@@ -94,20 +94,11 @@ class Kahala:
 
     # Modification du plateau
     def modificationPlateau(self, indice):
-        # Explication de la methode
-        # Distribbution de graine (par 1 : ajoute a tous case suivent +1)
-        # - si plus de case mais le nombre de graine > que 0 alors mettre +1 dans la case du joueur
-        # - Après y ajouter les autres graines (+1) dans les cases de l'adversaire (de la fin au de but)
-
         nombre = self.cases[self.tour][indice-1] # recupere les graines de la case selectionner
         indiceAdverse = 0 # Il va etre utiliser quand l'on voudra acceder au cases de l'adversaire (indice en fonction du develloppeur)
         position = indice # position suivante (indice en fonction du develloppeur)
 
         while nombre != 0:
-            # Quand le joueur actuelle ou avcersaire est en train de jouer : 
-            # verifier si la case du dernier graine mis appartient au joueur est vide
-            # Si oui Il prend les tous les graines de la même cases de l'adversaire est l'ajoute dans son grenier
-            
             if position <= 5:
                 # capture les graines advairse si la cases de destination est egale a zero, 0
                 if (nombre == 1) and (self.cases[self.tour][position] == 0):
