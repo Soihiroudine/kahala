@@ -102,7 +102,7 @@ class Jeu:
     # l'ordinateur va choisi de façon aleatoire
     def ordiRandom(self, nb):
         self.indice = r.choice(nb)
-        while self.verificationDeLaSaisie() and self.game.cases[self.game.tourJoueur()][self.indice-1] <= 0:
+        while self.verificationDeLaSaisie() or self.game.cases[self.game.tourJoueur()][self.indice-1] <= 0:
             self.indice = r.choice(nb) 
 
     # l'ordinateur va choisir la premiere valeur 
