@@ -4,7 +4,7 @@ Creation de classe joueur qui contient :
     et les point qu'il possède (dans notre jeu l'attribue point est le grenier')
 """
 class Joueur:
-    def __init__(self, name):
+    def __init__(self, name=""):
         self.nom = name
         self.point = 0 # le grenier du joueur
         self.humain = False # definit c'est un ordinateur : False ou un humain : True
