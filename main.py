@@ -1,4 +1,4 @@
-import parametre_kahala
+import gestion_du_jeu
 
-jeu = parametre_kahala.Jeu()
+jeu = gestion_du_jeu.Jeu()
 jeu.gameJeu()

@@ -1,7 +1,7 @@
 import random as r
 import time
 from Joueur import Joueur
-from jeu_kahala import Kahala
+from plateau_de_jeu import Kahala
 
 """
 La classe Jeu va être celui qui va gerer le Jeu
