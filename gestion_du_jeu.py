@@ -1,4 +1,4 @@
-import random as r
+8import random as r
 import time
 from Joueur import Joueur
 from plateau_de_jeu import Kahala
@@ -114,6 +114,17 @@ class Jeu:
             if not(self.verificationDeLaSaisie()) and not(self.game.cases[self.game.tourJoueur()][self.indice-1] <= 0):
                 return self.indice
 
+
+
+
+"""
+
+Implemetation du minmax
+
+"""
+
+
+
     # debut de la mise en place de l'algo minMax
     def sommeCase(self, cj):
         somme = 0
@@ -137,7 +148,16 @@ class Jeu:
               valmax = 0
             else:
                 valmin = 99
-                  
+    
+
+"""
+
+fin de la mise en place du minmax
+
+
+"""
+
+              
     # Il va permettre d'avoir le mode de jeu que l'on veut
     def modeJeu(self, mode):
         if mode == 1: 
