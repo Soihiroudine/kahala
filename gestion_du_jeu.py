@@ -1,7 +1,8 @@
-8import random as r
+import random as r
 import time
 from Joueur import Joueur
 from plateau_de_jeu import Kahala
+
 
 """
 La classe Jeu va être celui qui va gerer le Jeu
@@ -115,16 +116,11 @@ class Jeu:
                 return self.indice
 
 
+    """
 
+    Implemetation du minmax
 
-"""
-
-Implemetation du minmax
-
-"""
-
-
-
+    """
     # debut de la mise en place de l'algo minMax
     def sommeCase(self, cj):
         somme = 0
@@ -149,13 +145,12 @@ Implemetation du minmax
             else:
                 valmin = 99
     
+    """
 
-"""
-
-fin de la mise en place du minmax
+    fin de la mise en place du minmax
 
 
-"""
+    """
 
               
     # Il va permettre d'avoir le mode de jeu que l'on veut
@@ -165,11 +160,11 @@ fin de la mise en place du minmax
             sePresenter = input("Voulez-vous mettre vos noms (o/n): ")
             if sePresenter == "o":
                 jr1 = input("Nom du joueur 1 :")
-                self.j1 = Joueur(jr1)
+                self.j1.setName(jr1)
                 self.j1.setHumain(True)
 
                 jr2 = input("Nom du joueur 2 :")
-                self.j2 = Joueur(jr2)
+                self.j2.setName(jr2)
                 self.j2.setHumain(True)
                 print("")
             else:
@@ -181,19 +176,19 @@ fin de la mise en place du minmax
             sePresenter = input("Voulez-vous mettre votre nom (o/n): ")
             if sePresenter == "o":
                 jr1 = input("Nom du joueur :")
-                self.j1 = Joueur(jr1)
+                self.j1.setName(jr1)
                 self.j1.setHumain(True)
             else:
                 print("Je vous attribue des noms par default")
                 self.j1.setHumain(True)
             self.choixIntelligence()
-            self.j2 = Joueur("Renard")
+            self.j2.setName("Renard")
             print(f"C'est a vous de jouer {self.j1.getName()} et {self.j2.getName()}")
         elif mode == 3:
             print("Vous avez choisit ordinateur vs ordinateur")
             self.choixIntelligence()
-            self.j1 = Joueur("Renard")
-            self.j2 = Joueur("Lapin")
+            self.j1.setName("Renard")
+            self.j2.setName("Lapin")
 
     # Ceci est la fonction de mise en marche du jeu
     def gameJeu(self):
@@ -201,7 +196,6 @@ fin de la mise en place du minmax
         print("Bonjour a vous bienvenu dans le jeu du kahala")
         print("----------------------------------------------")
     
-
         # chosir avec qui jouer
         # - Humain vs Humain
         # - Humain vs Ordinateur

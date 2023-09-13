@@ -2,7 +2,7 @@ import random as r
 
 class Kahala:
     def __init__(self, joueur1, joueur2):
-        #self.graineMaxi = 48
+        self.graineMaxi = 48
         self.cases = [[4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4]]
         self.joueur = [joueur1, joueur2]
         self.tour = r.choice([0,1]) # choisi aléatoirement le premier joueur qui va jouer

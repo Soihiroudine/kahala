@@ -20,7 +20,10 @@ class Joueur:
     
     def setHumain(self, a):
         self.humain = a
-    
+
+    def setName(self, nom):
+        self.nom = nom
+        
     def plus(self, graine = 1):
         self.point += graine
 
