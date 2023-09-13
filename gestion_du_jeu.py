@@ -1,4 +1,4 @@
-import random as r
+import random
 import time
 from Joueur import Joueur
 from plateau_de_jeu import Kahala
@@ -13,7 +13,7 @@ class Jeu:
         # Valeur par default des noms de joueur
         self.j1 = Joueur("Joueur_A")
         self.j2 = Joueur("Joueur_B")
-        self.game = Kahala(self.j1, self.j2)
+        self.game = Kahala(self.j1, self.j2, random.choice([0,1]))
         self.indice = 0
         self.inteligenceOrdi = 1
         
@@ -97,14 +97,16 @@ class Jeu:
             else:
                 if self.inteligenceOrdi < 0 and self.inteligenceOrdi > 4:
                     print("\n Erreur : Mettre un nombre entre 1 et 3")
+                elif self.inteligenceOrdi == 3:
+                    print("\n Pas de cerveau existant")
                 else:
                     break
 
     # l'ordinateur va choisi de façon aleatoire
     def ordiRandom(self, nb):
-        self.indice = r.choice(nb)
+        self.indice = random.choice(nb)
         while self.verificationDeLaSaisie() or self.game.cases[self.game.tourJoueur()][self.indice-1] <= 0:
-            self.indice = r.choice(nb) 
+            self.indice = random.choice(nb) 
 
     # l'ordinateur va choisir la premiere valeur 
     # La seul condition est que la case doit être supérieur à 0
@@ -191,7 +193,7 @@ class Jeu:
             self.j2.setName("Lapin")
 
     # Ceci est la fonction de mise en marche du jeu
-    def gameJeu(self):
+    def start(self):
         print("")
         print("Bonjour a vous bienvenu dans le jeu du kahala")
         print("----------------------------------------------")
@@ -220,10 +222,7 @@ class Jeu:
                     break
 
         # Application du mode choist
-        self.modeJeu(quiJoue) 
-
-        # Appele de la classe kahala pour le jeu
-        self.game = Kahala(self.j1, self.j2)
+        self.modeJeu(quiJoue)
 
         # Boucle principale du jeu 
         while True:
@@ -270,3 +269,7 @@ class Jeu:
                 # Application de la modification du plateau en fonction de la case choisi
                 self.game.modificationPlateau(self.indice)
                 self.game.tourChangeJoueur()
+
+if __name__ == '__main__':
+    gameStart = Jeu()
+    gameStart.start()

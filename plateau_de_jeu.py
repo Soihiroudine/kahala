@@ -1,11 +1,13 @@
-import random as r
+"""
+Classe contenant la grille de jeu, les actions et les informations du plateau de jeu
+"""
 
 class Kahala:
-    def __init__(self, joueur1, joueur2):
+    def __init__(self, joueur1, joueur2, tour):
         self.graineMaxi = 48
         self.cases = [[4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4]]
         self.joueur = [joueur1, joueur2]
-        self.tour = r.choice([0,1]) # choisi aléatoirement le premier joueur qui va jouer
+        self.tour = tour # choisi aléatoirement le premier joueur qui va jouer
         self.capturer = False
     
     def initialisationCases(self):
