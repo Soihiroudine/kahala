@@ -1,4 +1,9 @@
 git/
+
 __pycache__/
+
 .git/
+
 *.pyc
+
+minMax.py

@@ -27,9 +27,3 @@ Bien sur il faut que python soit installer dans votre machine.
 
     --- Joueur B  choisi entre 1 à 6 :
 ```
-
-## Probleme
-
-Le jeu n'est pas totalement fini. Il manque l'implementation de l'algorithme minMax. Le niveau trois de l'inteligence de l'ordinateur.
-
-Dans tous les cas si est selectionner quand c'est au tour de l'ordinateur, le programme s'arrète.

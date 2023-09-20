@@ -21,25 +21,20 @@ class Jeu:
         OuiNon = input("Continuer (o/n): ")
         return OuiNon == "n" or OuiNon == "quit"
         
-    # Affiche qui a gagner
-    def gagnant(self):
+    def gagnant(self): 
         if self.j1.getPoint() > self.j2.getPoint():
             self.j1.information()
-            print(f"Le joueur {self.j1.getName()} a gagner !")
-            print()
+            print(f"Le joueur {self.j1.getName()} a gagner !\n")
         elif self.j1.getPoint() == self.j2.getPoint():
-            print(f"Les deux Joueurs sont la même valeur : {self.j1.getPoint()}")
-            print()
+            print(f"Les deux Joueurs sont la même valeur : {self.j1.getPoint()}\n")
         else:
             self.j2.information()
-            print(f"Le joueur {self.j2.getName()} a gagner !")
-            print()
+            print(f"Le joueur {self.j2.getName()} a gagner !\n")
 
-    # Verification de l'indice si c'est entre 1 et 6
-    def verificationDeLaSaisie(self):
-        return (self.indice < 1) or (self.indice > 6)  # type: ignore
+    def verificationDeLaSaisie(self): # Verification de l'indice si c'est entre 1 et 6
+        return (self.indice < 1) or (self.indice > 6)
     
-    def uneBonneSaisie(self, humain):
+    def uneBonneSaisie(self, humain): # verification de la saisie d'une case dans le plateau
         if humain:
             while True:
                 try:
@@ -51,6 +46,9 @@ class Jeu:
                     print("\n Erreur : veiller saisir un nombre !")
                     time.sleep(1)
                     self.game.plateau()
+                except KeyboardInterrupt:
+                    print("\n\tFin de programme par une touche !\n")
+                    break
                 else:
                     # 2 - Que le nombre est entre 1 et 6 (6 compris)
                     if self.verificationDeLaSaisie(): 
@@ -63,42 +61,40 @@ class Jeu:
                         time.sleep(1)
                         self.game.plateau()
                     else:
-                        # retourne l'indice si c'est bon
                         return self.indice  
         else:
-            # Appele de minmax
             print(f"l'ordinateur {self.game.joueur[self.game.tourJoueur()].getName()} fait son choix....")
             time.sleep(1)
-            choix = [1, 2, 3, 4, 5, 6]
-            # for elt in choix:
+            choix = [1, 2, 3, 4, 5, 6] # nombre de cases, nombre de choix
+
             if self.inteligenceOrdi == 1:
                 self.ordiNonInteligent(choix)
             elif self.inteligenceOrdi == 2:
                 self.ordiRandom(choix)
-            elif self.inteligenceOrdi == 3:
-                print("Pas encore mis d'intelliegence !")
-                return 0
-                
+            # elif self.inteligenceOrdi == 3:
+            #     print("Pas encore mis d'intelliegence !")
+            #     return 0
             return self.indice 
     
     def choixIntelligence(self):
         while True:
             try:
-                print()
-                print("Niveau de l'ordinateur :")
+                print("\n Niveau de l'ordinateur :")
                 print("  1 - facile")
                 print("  2 - Ordinateur qui choisit à l'instint (moyen)")
-                print("  3 - ordinateur intelligent (fort)")
+                # print("  3 - ordinateur intelligent (fort)")
                 self.inteligenceOrdi = input("Votre choix : ")
                 self.inteligenceOrdi = int(self.inteligenceOrdi)
             except ValueError:
                 # 1 - choisir un nombre entier
                 print("\n Erreur : veiller saisir un nombre !")
+            except KeyboardInterrupt:
+                print("\n\tFin de programme par une touche !\n")
             else:
-                if self.inteligenceOrdi < 0 and self.inteligenceOrdi > 4:
-                    print("\n Erreur : Mettre un nombre entre 1 et 3")
-                elif self.inteligenceOrdi == 3:
-                    print("\n Pas de cerveau existant")
+                if self.inteligenceOrdi < 0 and self.inteligenceOrdi > 3:
+                    print("\n Erreur : Mettre un nombre entre 1 ou 2")
+                # elif self.inteligenceOrdi == 3:
+                #     print("\n Pas de cerveau existant")
                 else:
                     break
 
@@ -116,77 +112,40 @@ class Jeu:
             self.indice = elt
             if not(self.verificationDeLaSaisie()) and not(self.game.cases[self.game.tourJoueur()][self.indice-1] <= 0):
                 return self.indice
+       
+    def miseAjourJoueur(self, joueur, humain, numero):
+        nom = input(f"Nom du joueur {numero} :")
+        joueur.setName(nom)
+        joueur.setHumain(humain)
 
-
-    """
-
-    Implemetation du minmax
-
-    """
-    # debut de la mise en place de l'algo minMax
-    def sommeCase(self, cj):
-        somme = 0
-        for elt in cj:
-            somme += elt
-        return somme
-    
-    def score(self, j):
-        return 3*self.game.joueur[j].getPoint()+self.sommeCase(self.game.cases[j])
-
-    def v(self):
-        joueur_A = 0
-        joueur_B = 1
-        return self.score(joueur_A) / self.score(joueur_B)       
-
-    def minMax(self, e, pmax, j):
-        if e == 7 or pmax == 0:
-            return self.v()
-        else:
-            if j:
-              valmax = 0
-            else:
-                valmin = 99
-    
-    """
-
-    fin de la mise en place du minmax
-
-
-    """
-
-              
     # Il va permettre d'avoir le mode de jeu que l'on veut
     def modeJeu(self, mode):
-        if mode == 1: 
+        if mode == 1: # humain contre humain
             # Saisie d'information des joueur
             sePresenter = input("Voulez-vous mettre vos noms (o/n): ")
             if sePresenter == "o":
-                jr1 = input("Nom du joueur 1 :")
-                self.j1.setName(jr1)
-                self.j1.setHumain(True)
-
-                jr2 = input("Nom du joueur 2 :")
-                self.j2.setName(jr2)
-                self.j2.setHumain(True)
-                print("")
+                self.miseAjourJoueur(self.j1, True, 1)
+                self.miseAjourJoueur(self.j2, True, 2)
+                print()
             else:
                 print("Je vous attribue des noms par default")
                 self.j1.setHumain(True)
                 self.j2.setHumain(True)
             print(f"C'est a vous de jouer {self.j1.getName()} et {self.j2.getName()}")
-        elif mode == 2:
+
+        elif mode == 2: # humain contre machine
+            print("Vous avez choisit humain vs ordinateur")
             sePresenter = input("Voulez-vous mettre votre nom (o/n): ")
             if sePresenter == "o":
-                jr1 = input("Nom du joueur :")
-                self.j1.setName(jr1)
-                self.j1.setHumain(True)
+                self.miseAjourJoueur(self.j1, True, 1)
             else:
                 print("Je vous attribue des noms par default")
                 self.j1.setHumain(True)
             self.choixIntelligence()
             self.j2.setName("Renard")
             print(f"C'est a vous de jouer {self.j1.getName()} et {self.j2.getName()}")
-        elif mode == 3:
+
+        elif mode == 3:  # Machine contre machine
             print("Vous avez choisit ordinateur vs ordinateur")
             self.choixIntelligence()
             self.j1.setName("Renard")
@@ -194,8 +153,7 @@ class Jeu:
 
     # Ceci est la fonction de mise en marche du jeu
     def start(self):
-        print("")
-        print("Bonjour a vous bienvenu dans le jeu du kahala")
+        print("\nBonjour a vous bienvenu dans le jeu du kahala")
         print("----------------------------------------------")
     
         # chosir avec qui jouer
@@ -248,8 +206,7 @@ class Jeu:
                     
                     self.game.plateau()
                     print("Vous avez quitter le jeu !")
-                    print("Au-revoir !!!!")
-                    print()
+                    print("Au-revoir !!!!\n")
                     break 
                 elif self.game.capturer:
                     self.game.initialisationCases()
@@ -259,7 +216,9 @@ class Jeu:
                 # Si ce n'est pas un nombre entier : il lui redemande 
                 # Si le chiffre n'est pas compris entre 1 et 6 : il lui redemande
 
-                self.uneBonneSaisie(self.game.joueur[self.game.tourJoueur()].getHumain())
+                # si une touche spéciale est activer le programme s'arrète
+                if type(self.uneBonneSaisie(self.game.joueur[self.game.tourJoueur()].getHumain())) != type(1):
+                    break
                 
                 # Affichage de la case que le joueur a choisi
                 print(f"{self.game.joueur[self.game.tourJoueur()].getName()} a choisi : {self.indice}")
@@ -269,7 +228,3 @@ class Jeu:
                 # Application de la modification du plateau en fonction de la case choisi
                 self.game.modificationPlateau(self.indice)
                 self.game.tourChangeJoueur()
-
-if __name__ == '__main__':
-    gameStart = Jeu()
-    gameStart.start()
