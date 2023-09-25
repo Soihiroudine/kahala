@@ -64,21 +64,12 @@ class Kahala:
                 self.cases[j][rang] = 0
 
     # Methode pour acceder à la case de l'adversaire
-    def positionAdvairse(self, nb):
+    def positionAdvairse(self, nb, m = 5):
         if nb == 0:
-            return 5
-        elif nb == 1:
-            return 4
-        elif nb == 2:
-            return 3
-        elif nb == 3:
-            return 2
-        elif nb == 4:
-            return  1
-        elif nb == 5:
-            return 0
-        else:
-            return -1
+            return m
+        return self.positionAdvairse(nb-1, m-1)
+        # else:
+        #     return -1
 
     # Methode pour l'affichage du plateau de jeu
     def plateau(self):
