@@ -13,7 +13,7 @@ class Jeu:
         # Valeur par default des noms de joueur
         self.j1 = Joueur("Joueur_A")
         self.j2 = Joueur("Joueur_B")
-        self.game = Kahala(self.j1, self.j2, random.choice([0,1]))
+        self.game = Kahala(self.j1, self.j2, random.choice([0, 1]))
         self.indice = 0
         self.inteligenceOrdi = 1
         
@@ -31,10 +31,10 @@ class Jeu:
             self.j2.information()
             print(f"Le joueur {self.j2.getName()} a gagner !\n")
 
-    def verificationDeLaSaisie(self): # Verification de l'indice si c'est entre 1 et 6
+    def verificationDeLaSaisie(self):  # Verification de l'indice si c'est entre 1 et 6
         return (self.indice < 1) or (self.indice > 6)
     
-    def uneBonneSaisie(self, humain): # verification de la saisie d'une case dans le plateau
+    def uneBonneSaisie(self, humain):  # verification de la saisie d'une case dans le plateau
         if humain:
             while True:
                 try:
@@ -65,7 +65,7 @@ class Jeu:
         else:
             print(f"l'ordinateur {self.game.joueur[self.game.tourJoueur()].getName()} fait son choix....")
             time.sleep(1)
-            choix = [1, 2, 3, 4, 5, 6] # nombre de cases, nombre de choix
+            choix = [1, 2, 3, 4, 5, 6]  # nombre de cases, nombre de choix
 
             if self.inteligenceOrdi == 1:
                 self.ordiNonInteligent(choix)
