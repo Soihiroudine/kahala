@@ -27,3 +27,6 @@ Bien sur il faut que python soit installer dans votre machine.
 
     --- Joueur B  choisi entre 1 à 6 :
 ```
+
+### Remarque
+Le jeu du kahala ne possède pas tous les règles du jeu d'origine, je l'ai fait plutôt simple.
