@@ -6,6 +6,10 @@ from plateau_de_jeu import Kahala
 
 """
 La classe Jeu va être celui qui va gerer le Jeu
+ - Il va gérer les informations des joueurs : 
+     - leur noms
+     - type du joueur(humain ou machine
+ - La saisie des cases dans la partie 
 """
 
 class Jeu:
