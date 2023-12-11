@@ -5,3 +5,6 @@ __pycache__/
 .git/
 
 *.pyc
+minMax.py
+*.vs*
+*.sql
