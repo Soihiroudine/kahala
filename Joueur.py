@@ -1,9 +1,11 @@
-"""
-Creation de classe joueur qui contient :
+
+class Joueur:
+    '''
+    Creation de classe joueur qui contient :
     le nom du joueur bien sure demander
     et les point qu'il possède (dans notre jeu l'attribue point est le grenier')
-"""
-class Joueur:
+    '''
+    
     def __init__(self, name=""):
         self.nom = name
         self.point = 0 # le grenier du joueur

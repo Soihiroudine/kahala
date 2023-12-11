@@ -3,16 +3,15 @@ import time
 from Joueur import Joueur
 from plateau_de_jeu import Kahala
 
-
-"""
-La classe Jeu va être celui qui va gerer le Jeu
- - Il va gérer les informations des joueurs : 
+class Jeu:
+    '''
+    La classe Jeu va être celui qui va gerer le Jeu
+    Il va gérer les informations des joueurs : 
      - leur noms
      - type du joueur(humain ou machine
- - La saisie des cases dans la partie 
-"""
-
-class Jeu:
+     - La saisie des cases dans la partie 
+    '''
+    
     def __init__(self):
         # Valeur par default des noms de joueur
         self.j1 = Joueur("Joueur_A")
@@ -22,10 +21,18 @@ class Jeu:
         self.inteligenceOrdi = 1
         
     def continuerOuQuitter(self):
+        '''
+        Demande si l'on veut continuer
+        - Si n ou quit selectionner return True
+        - Si un autre element est mit retturn False
+        '''
         OuiNon = input("Continuer (o/n): ")
         return OuiNon == "n" or OuiNon == "quit"
         
     def gagnant(self): 
+        '''
+        Va retourner le gagnant de la partie
+        '''
         if self.j1.getPoint() > self.j2.getPoint():
             self.j1.information()
             print(f"Le joueur {self.j1.getName()} a gagner !\n")
@@ -35,10 +42,22 @@ class Jeu:
             self.j2.information()
             print(f"Le joueur {self.j2.getName()} a gagner !\n")
 
-    def verificationDeLaSaisie(self):  # Verification de l'indice si c'est entre 1 et 6
+    def verificationDeLaSaisie(self):
+        ''' 
+        Verification de l'indice si c'est entre 1 et 6
+        Retourne un boolean : 
+        - True si le nombre est entre [1;6] le 6 compris
+        - Retourne False sinon
+        '''
         return (self.indice < 1) or (self.indice > 6)
     
-    def uneBonneSaisie(self, humain):  # verification de la saisie d'une case dans le plateau
+    def uneBonneSaisie(self, humain):
+        ''' 
+        verification de la saisie d'une case dans le plateau :
+         - choisir un nombre entier
+         - Que le nombre est entre 1 et 6 (6 compris)
+         - Que la case selectionner a au minimum 1 graine
+        '''
         if humain:
             while True:
                 try:
@@ -81,6 +100,9 @@ class Jeu:
             return self.indice 
     
     def choixIntelligence(self):
+        '''
+        Va definir le niveau dont on va jouer avec l'ordinateur
+        '''
         while True:
             try:
                 print("\n Niveau de l'ordinateur :")
@@ -102,16 +124,22 @@ class Jeu:
                 else:
                     break
 
-    # l'ordinateur va choisi de façon aleatoire
     def ordiRandom(self, nb):
+        '''
+        - Le choix de l'ordinateur va etre aleatoire.
+        - La seul condition est que la case doit être supérieur à 0.
+        - Est que l'indice prit soit entre 1 et 6
+        '''
         self.indice = random.choice(nb)
         while self.verificationDeLaSaisie() or self.game.cases[self.game.tourJoueur()][self.indice-1] <= 0:
             self.indice = random.choice(nb) 
 
-    # l'ordinateur va choisir la premiere valeur 
-    # La seul condition est que la case doit être supérieur à 0
-    # Est que l'indice prit soit entre 1 et 6
     def ordiNonInteligent(self, nb):
+        '''
+        - l'ordinateur va choisir la premiere valeur 
+        - La seul condition est que la case doit être supérieur à 0
+        - Est que l'indice prit soit entre 1 et 6
+        '''
         for elt in nb:
             self.indice = elt
             if not(self.verificationDeLaSaisie()) and not(self.game.cases[self.game.tourJoueur()][self.indice-1] <= 0):

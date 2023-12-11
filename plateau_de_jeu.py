@@ -1,8 +1,10 @@
-"""
-Classe contenant la grille de jeu, les actions et les informations du plateau de jeu
-"""
+
 
 class Kahala:
+    '''
+    Classe contenant la grille de jeu, les actions et les informations du plateau de jeu
+    '''
+
     def __init__(self, joueur1, joueur2, tour):
         self.graineMaxi = 48
         self.cases = [[4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4]]
@@ -63,16 +65,15 @@ class Kahala:
                 self.joueur[j].plus(self.cases[j][rang])
                 self.cases[j][rang] = 0
 
-    # Methode pour acceder à la case de l'adversaire
     def positionAdvairse(self, nb, m = 5):
+        # Methode pour acceder à la case de l'adversaire
         if nb == 0:
             return m
         return self.positionAdvairse(nb-1, m-1)
-        # else:
-        #     return -1
 
-    # Methode pour l'affichage du plateau de jeu
+    
     def plateau(self):
+        # Affichage du plateau de jeu
         print("")
         print()
         print(" "*20 + self.joueur[0].getName())
@@ -85,8 +86,9 @@ class Kahala:
         print(" "*5+"    1  " +"    2   "+ "   3   "+ "   4   "+ "   5   "+ "   6   ")
         print(" "*20 + self.joueur[1].getName())
 
-    # Modification du plateau
+   
     def modificationPlateau(self, indice):
+        # Modification du plateau
         nombre = self.cases[self.tour][indice-1] # recupere les graines de la case selectionner
         indiceAdverse = 0 # Il va etre utiliser quand l'on voudra acceder au cases de l'adversaire (indice en fonction du develloppeur)
         position = indice # position suivante (indice en fonction du develloppeur)
