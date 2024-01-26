@@ -6,10 +6,10 @@ class Joueur:
     et les point qu'il possède (dans notre jeu l'attribue point est le grenier')
     '''
     
-    def __init__(self, name=""):
+    def __init__(self, name = "", point = 0, humain = False):
         self.nom = name
-        self.point = 0 # le grenier du joueur
-        self.humain = False # definit c'est un ordinateur : False ou un humain : True
+        self.point = point # le grenier du joueur
+        self.humain = humain # definit c'est un ordinateur : False ou un humain : True
 
     def getName(self):
         return self.nom

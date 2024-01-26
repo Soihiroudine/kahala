@@ -188,11 +188,12 @@ class Jeu:
         print("\nBonjour a vous bienvenu dans le jeu du kahala")
         print("----------------------------------------------")
     
-        # chosir avec qui jouer
-        # - Humain vs Humain
-        # - Humain vs Ordinateur
-        # - Ordinateur vs Ordinateur
         while True:
+            ''' chosir avec qui jouer
+             - Humain vs Humain
+             - Humain vs Ordinateur
+             - Ordinateur vs Ordinateur
+            '''
             try:
                 print()
                 print("Chosit le mode de jeu : ")
