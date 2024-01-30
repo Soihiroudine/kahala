@@ -53,7 +53,9 @@ class Sauver:
             "nomJoueur2": "",
             "partieJouer": 0,
             "gainJoueur1": [],
-            "gainJoueur2": []
+            "gainJoueur2": [],
+            "plateau":[[],[]],
+            "sauvegardeAuto" : True
         }
         return element
 

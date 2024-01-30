@@ -30,3 +30,4 @@ Bien sur il faut que python soit installer dans votre machine.
 
 ### Remarque
 Le jeu du kahala ne possède pas tous les règles du jeu d'origine, je l'ai fait plutôt simple.
+
