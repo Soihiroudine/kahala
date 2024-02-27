@@ -41,8 +41,7 @@ class Kahala:
         # permet de connaitre le rang du joueur advairse
         if self.tourJoueur() == 0:
             return 1
-        else:
-            return 0
+        return 0
     
     def joueurCasesTousVide(self):
         # 0 Si tous les cases du joueur actuelle ou advairse sont vide 
