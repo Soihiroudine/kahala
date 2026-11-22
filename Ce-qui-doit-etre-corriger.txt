@@ -1,0 +1,8 @@
+Lorsque un personnage a plus de la moitier des grain il ne gagne pas automatiquement;
+ - Il faudra corriger cela
+
+Bug : On arrive pas a ajouter le grain dans le grebier Lorsque l'adversaire n'a pas de grain dans la case opposé.
+ - Faudra vérifier si c'est comme cela dans le jeu d'origine
+
+Au fil et à mésure que je reviendrai dans le code je ferai quele code puisse appliquer plus des règles du jeu original
+
