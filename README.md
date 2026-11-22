@@ -1,17 +1,29 @@
-# Le jeu du Kahala en mode console
+# Le jeu du Kahala
 
 ## Outils
 
-- Python 3
+- Python 3 pour la version console
+- Un navigateur web récent pour la version web
 
 ## Jouer au jeu
 
-Pour jouer au jeu du kahala, il faut executer le ficher `main.py`.
+## Version web
+
+Ouvrez `index.html` dans un navigateur. Choisissez un mode et les noms, puis démarrez une partie.
+La version web fonctionne sans serveur et sans dépendance externe.
+
+- Deux joueurs sur le même appareil
+- Joueur contre ordinateur (choix facile ou aléatoire)
+- Ordinateur contre ordinateur, coup par coup
+
+## Version console
+
+Pour jouer au Kahala dans le terminal, exécutez `main.py`.
 
 Vous pouvez ouvrir un terminal et executer le fichier.
 Bien sur il faut que python soit installer dans votre machine.
 
-### Affichage du jeu
+### Affichage du jeu en console
 
 ```text
 

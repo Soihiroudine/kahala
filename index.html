@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#12251f">
+  <title>Kahala — Le jeu des graines</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Kahala, accueil">
+      <span class="brand-mark" aria-hidden="true">K</span>
+      <span>Kahala<span class="brand-period">.</span></span>
+    </a>
+    <span class="header-note">Un jeu de stratégie et de partage</span>
+  </header>
+
+  <main class="page-shell">
+    <section class="page-heading" aria-labelledby="page-title">
+      <p class="eyebrow">LE PLATEAU EST À VOUS</p>
+      <h1 id="page-title">Chaque graine compte.</h1>
+      <p class="page-description">Distribuez vos graines, remplissez votre grenier et anticipez les coups de votre adversaire.</p>
+    </section>
+
+    <div class="game-layout">
+      <aside class="control-panel">
+        <section id="setup-panel" class="panel setup-panel">
+          <div class="panel-heading">
+            <span class="step-number">01</span>
+            <div>
+              <p class="eyebrow">AVANT DE JOUER</p>
+              <h2>Préparer la partie</h2>
+            </div>
+          </div>
+
+          <form id="setup-form">
+            <label class="field-label" for="game-mode">Mode de jeu</label>
+            <select id="game-mode" name="mode">
+              <option value="human-human">Deux joueurs</option>
+              <option value="human-ai">Contre l'ordinateur</option>
+              <option value="ai-ai">Ordinateur contre ordinateur</option>
+            </select>
+
+            <div id="player-one-field" class="name-field">
+              <label class="field-label" for="player-one-name">Nom du joueur 1</label>
+              <input id="player-one-name" name="playerOne" type="text" maxlength="20" value="Joueur A" autocomplete="off">
+            </div>
+
+            <div id="player-two-field" class="name-field">
+              <label class="field-label" for="player-two-name">Nom du joueur 2</label>
+              <input id="player-two-name" name="playerTwo" type="text" maxlength="20" value="Joueur B" autocomplete="off">
+            </div>
+
+            <div id="difficulty-field" class="name-field is-hidden">
+              <label class="field-label" for="ai-level">Niveau de l'ordinateur</label>
+              <select id="ai-level" name="difficulty">
+                <option value="easy">Facile — première case disponible</option>
+                <option value="random">Moyen — choix aléatoire</option>
+              </select>
+            </div>
+
+            <button class="primary-button" type="submit">
+              <span>Commencer la partie</span><span aria-hidden="true">→</span>
+            </button>
+          </form>
+
+          <p class="rules-note"><span class="note-icon" aria-hidden="true">i</span> La partie se termine lorsqu'un côté du plateau est vide. Les graines restantes rejoignent le grenier correspondant.</p>
+        </section>
+
+        <section id="live-panel" class="panel live-panel is-hidden" aria-live="polite">
+          <div class="panel-heading">
+            <span class="step-number">02</span>
+            <div>
+              <p class="eyebrow">PARTIE EN COURS</p>
+              <h2 id="turn-heading">À vous de jouer</h2>
+            </div>
+          </div>
+          <p id="turn-message" class="turn-message">Choisissez une case contenant des graines.</p>
+          <div class="score-list">
+            <div class="score-row">
+              <span class="player-dot player-dot-one" aria-hidden="true"></span>
+              <span id="score-name-one">Joueur A</span>
+              <strong id="score-one">0</strong>
+            </div>
+            <div class="score-row">
+              <span class="player-dot player-dot-two" aria-hidden="true"></span>
+              <span id="score-name-two">Joueur B</span>
+              <strong id="score-two">0</strong>
+            </div>
+          </div>
+          <div id="game-actions" class="game-actions">
+            <button id="next-turn-button" class="primary-button is-hidden" type="button">Jouer le coup de l'ordinateur <span aria-hidden="true">→</span></button>
+            <button id="new-game-button" class="secondary-button" type="button">Nouvelle partie</button>
+          </div>
+          <p class="seed-total">Graines sur le plateau <strong id="seed-total">48</strong><span>/ 48</span></p>
+        </section>
+      </aside>
+
+      <section class="board-panel" aria-label="Plateau de jeu du Kahala">
+        <div class="board-topline">
+          <div>
+            <p class="eyebrow">LE PLATEAU</p>
+            <h2>Votre terrain de jeu</h2>
+          </div>
+          <span id="game-status" class="status-pill">En attente</span>
+        </div>
+
+        <div id="board" class="board is-disabled" aria-label="Cases de jeu">
+          <div id="store-one" class="store store-one" aria-label="Grenier du joueur 2">
+            <span class="store-label">GRENIER</span>
+            <strong class="store-count">0</strong>
+            <span id="store-name-one" class="store-owner">Joueur B</span>
+          </div>
+          <div id="row-two" class="pit-row pit-row-two" aria-label="Cases du joueur 2"></div>
+          <div class="board-center" aria-hidden="true">
+            <span>KAHALA</span>
+            <span class="center-line"></span>
+            <span>48 GRAINES</span>
+          </div>
+          <div id="row-one" class="pit-row pit-row-one" aria-label="Cases du joueur 1"></div>
+          <div id="store-zero" class="store store-zero" aria-label="Grenier du joueur 1">
+            <span class="store-label">GRENIER</span>
+            <strong class="store-count">0</strong>
+            <span id="store-name-zero" class="store-owner">Joueur A</span>
+          </div>
+        </div>
+        <div class="board-legend">
+          <span><span class="legend-dot" aria-hidden="true"></span> Votre rangée est mise en évidence</span>
+          <span>Choisissez une case pour semer</span>
+        </div>
+        <p id="game-feedback" class="game-feedback" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+    <footer class="page-footer">Kahala <span>·</span> Une graine après l'autre.</footer>
+  </main>
+</body>
+</html>

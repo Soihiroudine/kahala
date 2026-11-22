@@ -1,129 +1,128 @@
 
-
 class Kahala:
-    '''
-    Classe contenant la grille de jeu, les actions et les informations du plateau de jeu
-    '''
+    """Plateau de jeu à deux rangées de six cases."""
 
-    def __init__(self, joueur1, joueur2, tour):
+    def __init__(self, joueur1, joueur2, tour: int) -> None:
         self.graineMaxi = 48
-        self.cases = [[4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4]]
+        self.cases = [[4] * 6, [4] * 6]
         self.joueur = [joueur1, joueur2]
-        self.tour = tour # choisi aléatoirement le premier joueur qui va jouer
+        self.tour = tour
         self.capturer = False
-    
-    def initialisationCases(self):
-        # Mise a jour du jeu
-        # initialisation de la case
-        self.cases = [[4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4]]
-        for jn in range(len(self.joueur)):
-            self.joueur[jn].moins()
 
-    def moitierDesGraine(self):
-        # On va voir si un des joueurs possède plus de la moitier des graines dans son grenier
+    def initialisationCases(self) -> None:
+        self.cases = [[4] * 6, [4] * 6]
         for joueur in self.joueur:
-            if joueur.getPoint() > self.graineMaxi//2:
-                return True
-        return False
+            joueur.reset_points()
+        self.capturer = False
 
-    def tourChangeJoueur(self):
-        # Permet de passer au tour du joueur suivant
-        if self.tour == 0:
-            self.tour = 1
-        elif self.tour == 1:
-            self.tour = 0
+    def moitierDesGraine(self) -> bool:
+        return any(joueur.getPoint() > self.graineMaxi // 2 for joueur in self.joueur)
 
-    def tourJoueur(self):
-        # Retourn un chiffre : 0 ou 1 representant le rang du le joueur qui joue actuellement
+    def tourChangeJoueur(self) -> None:
+        self.tour = 1 - self.tour
+
+    def tourJoueur(self) -> int:
         return self.tour
 
-    def rangJoueurAdverse(self):
-        # permet de connaitre le rang du joueur advairse
-        if self.tourJoueur() == 0:
-            return 1
-        return 0
-    
-    def joueurCasesTousVide(self):
-        # 0 Si tous les cases du joueur actuelle ou advairse sont vide 
-        # n sinon
-        vide1 = 0
-        vide2 = 0
-        for j in range(len(self.joueur)):
-            for nb in self.cases[j]:
-                if j == 0 and nb > 0:
-                    vide1 += 1
-                elif j == 1 and nb > 0:
-                    vide2 += 1
-        return vide1 == 0 or vide2 == 0
-    
-    # methode pour permettre de tout capturer
-    def captureTous(self):
+    def rangJoueurAdverse(self) -> int:
+        return 1 - self.tour
+
+    def joueurCasesTousVide(self) -> bool:
+        return any(all(case == 0 for case in ligne) for ligne in self.cases)
+
+    def captureTous(self) -> None:
         self.capturer = True
-        for j in range(len(self.joueur)):
-            for rang in range(len(self.cases[j])):
-                self.joueur[j].plus(self.cases[j][rang])
-                self.cases[j][rang] = 0
+        for rang, ligne in enumerate(self.cases):
+            reste = sum(ligne)
+            self.joueur[rang].plus(reste)
+            self.cases[rang] = [0] * 6
 
-    def positionAdvairse(self, nb, m = 5):
-        # Methode pour acceder à la case de l'adversaire
-        if nb == 0:
-            return m
-        return self.positionAdvairse(nb-1, m-1)
+    def positionAdvairse(self, nb: int, m: int = 5) -> int:
+        if not 0 <= nb <= 5:
+            raise IndexError("La position doit être comprise entre 0 et 5.")
+        return 5 - nb
 
-    
-    def plateau(self):
-        # Affichage du plateau de jeu
+    def plateau(self) -> None:
         print("")
         print()
-        print(" "*20 + self.joueur[0].getName())
-        print(" "*5+"    6  " +"    5   "+ "   4   "+ "   3   "+ "   2   "+ "   1   ")
+        print(" " * 20 + self.joueur[0].getName())
+        print(" " * 5 + "    6  " + "    5   " + "   4   " + "   3   " + "   2   " + "   1   ")
         print("-------------------------------------------------------")
-        print("|" + " GA " + " | " + f" {self.cases[0][5]:<2d} " + " | " + f" {self.cases[0][4]:<2d} " + " | " + f" {self.cases[0][3]:<2d} " + " | " + f" {self.cases[0][2]:<2d} " + " | " + f" {self.cases[0][1]:<2d} " + " | " + f" {self.cases[0][0]:<2d} " + " | " +  "    " + "| ")
+        print("|" + " GA " + " | " + f" {self.cases[0][5]:<2d} " + " | " + f" {self.cases[0][4]:<2d} " + " | " + f" {self.cases[0][3]:<2d} " + " | " + f" {self.cases[0][2]:<2d} " + " | " + f" {self.cases[0][1]:<2d} " + " | " + f" {self.cases[0][0]:<2d} " + " | " + "    " + "| ")
         print("|" + f" {self.joueur[0].getPoint():<2d} " + " |-----------------------------------------|" + f" {self.joueur[1].getPoint():<2d}" + "  | ")
-        print("|" + "    " + " | " + f" {self.cases[1][0]:<2d} " + " | " + f" {self.cases[1][1]:<2d} " + " | " + f" {self.cases[1][2]:<2d} " + " | " + f" {self.cases[1][3]:<2d} " + " | " + f" {self.cases[1][4]:<2d} " + " | " + f" {self.cases[1][5]:<2d} " + " | " +  "GB  " + "| ")
+        print("|" + "    " + " | " + f" {self.cases[1][0]:<2d} " + " | " + f" {self.cases[1][1]:<2d} " + " | " + f" {self.cases[1][2]:<2d} " + " | " + f" {self.cases[1][3]:<2d} " + " | " + f" {self.cases[1][4]:<2d} " + " | " + f" {self.cases[1][5]:<2d} " + " | " + "GB  " + "| ")
         print("-------------------------------------------------------")
-        print(" "*5+"    1  " +"    2   "+ "   3   "+ "   4   "+ "   5   "+ "   6   ")
-        print(" "*20 + self.joueur[1].getName())
+        print(" " * 5 + "    1  " + "    2   " + "   3   " + "   4   " + "   5   " + "   6   ")
+        print(" " * 20 + self.joueur[1].getName())
 
-   
-    def modificationPlateau(self, indice):
-        # Modification du plateau
-        nombre = self.cases[self.tour][indice-1] # recupere les graines de la case selectionner
-        indiceAdverse = 0 # Il va etre utiliser quand l'on voudra acceder au cases de l'adversaire (indice en fonction du develloppeur)
-        position = indice # position suivante (indice en fonction du develloppeur)
+    def modificationPlateau(self, indice: int) -> bool:
+        """Distribue les graines et retourne True si le joueur rejoue."""
+        if not 1 <= indice <= 6:
+            raise ValueError("L'indice doit être compris entre 1 et 6.")
 
-        while nombre != 0:
-            if position <= 5:
-                # capture les graines advairse si la cases de destination est egale a zero, 0
-                if (nombre == 1) and (self.cases[self.tour][position] == 0):
-                    self.joueur[self.tour].plus(self.cases[self.rangJoueurAdverse()][self.positionAdvairse(position)])
-                    self.joueur[self.tour].plus()
+        row = self.tour
+        pit = indice - 1
+        nombre = self.cases[row][pit]
+        if nombre <= 0:
+            raise ValueError("La case choisie est vide.")
 
-                    self.cases[self.rangJoueurAdverse()][self.positionAdvairse(position)] = 0
-                    self.cases[self.tour][indice-1] -= 1
+        self.cases[row][pit] = 0
+        last_store = False
+        last_row = row
+        last_pit = pit
 
-                    print(f"Le joueur {self.joueur[self.tourJoueur()].getName()} a capturer les graines de la case {self.positionAdvairse(position)+1}")
-                    nombre -= 1
-                    position += 1
-                # navigation dans les cases du joueur
+        while nombre > 0:
+            if row == 0:
+                if pit < 5:
+                    pit += 1
                 else:
-                    self.cases[self.tour][position] += 1 
-                    self.cases[self.tour][indice-1] -= 1
+                    self.joueur[0].plus()
+                    last_row = 0
+                    last_pit = -1
+                    last_store = True
+                    row = 1
+                    pit = 0
                     nombre -= 1
-                    position += 1
-            # ajout de +1 graine dans le grenier, quand on encore n graine non distribuer et que nous somme à la fin de sa table 
-            elif position == 6:
-                self.joueur[self.tour].plus()
-                self.cases[self.tour][indice-1] -= 1
-                nombre -= 1
-                position += 1
+                    if nombre == 0:
+                        break
+                    continue
             else:
-                # l'accès au case de l'adversaire
-                self.cases[self.rangJoueurAdverse()][indiceAdverse] += 1
-                self.cases[self.tour][indice-1] -= 1
-                # position += 1
-                indiceAdverse += 1 
-                nombre -= 1
-                if indiceAdverse == 6:
-                    position = 0
-                    indiceAdverse = 0
+                if pit < 5:
+                    pit += 1
+                else:
+                    self.joueur[1].plus()
+                    last_row = 1
+                    last_pit = -1
+                    last_store = True
+                    row = 0
+                    pit = 5
+                    nombre -= 1
+                    if nombre == 0:
+                        break
+                    continue
+
+            self.cases[row][pit] += 1
+            last_row = row
+            last_pit = pit
+            last_store = False
+            nombre -= 1
+
+        # Si la graine se termine dans un grenier, le joueur rejoue.
+        rejoue = last_store
+
+        # Une capture exige une case propre à soi, contenant 1 graine,
+        # et une case adverse contenant au moins une graine.
+        if not rejoue and last_row == self.tour and 0 <= last_pit <= 5:
+            if self.cases[last_row][last_pit] == 1:
+                opposite = self.cases[1 - last_row][5 - last_pit]
+                if opposite > 0:
+                    gain = opposite + 1
+                    self.cases[last_row][last_pit] = 0
+                    self.cases[1 - last_row][5 - last_pit] = 0
+                    self.joueur[last_row].plus(gain)
+                    print(
+                        f"Le joueur {self.joueur[last_row].getName()} "
+                        f"a capturé {gain} graines."
+                    )
+
+        return rejoue
