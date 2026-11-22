@@ -15,6 +15,7 @@
       <span>Kahala<span class="brand-period">.</span></span>
     </a>
     <span class="header-note">Un jeu de stratégie et de partage</span>
+    <button id="help-button" class="help-button" type="button" aria-haspopup="dialog" aria-controls="rules-dialog">Aide</button>
   </header>
 
   <main class="page-shell">
@@ -135,5 +136,25 @@
     </div>
     <footer class="page-footer">Kahala <span>·</span> Une graine après l'autre.</footer>
   </main>
+  <dialog id="rules-dialog" class="rules-dialog" aria-labelledby="rules-title">
+    <div class="rules-dialog-heading">
+      <div>
+        <p class="eyebrow">COMMENT JOUER</p>
+        <h2 id="rules-title">Règles du Kahala</h2>
+      </div>
+      <button id="close-rules-button" class="secondary-button rules-close-button" type="button">Fermer</button>
+    </div>
+    <div class="rules-content">
+      <p>Le plateau comporte deux rangées de six cases. Chaque case commence avec quatre graines. Le but est de récolter plus de graines que l'adversaire.</p>
+      <ol>
+        <li>À votre tour, choisissez une case non vide de votre rangée et prenez toutes ses graines.</li>
+        <li>Semez-les une par une dans les cases suivantes, dans le sens du parcours autour du plateau, puis dans votre grenier. Sautez le grenier adverse si vous passez devant. Si nécessaire, poursuivez dans la rangée adverse.</li>
+        <li>Si la dernière graine tombe dans votre grenier, vous rejouez.</li>
+        <li>Si elle tombe dans une case vide de votre rangée, vous capturez cette graine et celles de la case opposée, si celle-ci n'est pas vide.</li>
+        <li>La partie s'arrête dès qu'une rangée est vide. Les graines encore présentes dans l'autre rangée vont au grenier de son propriétaire.</li>
+      </ol>
+      <p>Le joueur qui a le plus de graines dans son grenier gagne. Une égalité est possible.</p>
+    </div>
+  </dialog>
 </body>
 </html>

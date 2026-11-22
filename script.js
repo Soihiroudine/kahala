@@ -148,6 +148,7 @@ function initKahalaPage() {
   const board = byId("board");
   const feedback = byId("game-feedback");
   const nextTurnButton = byId("next-turn-button");
+  const rulesDialog = byId("rules-dialog");
   let game = null;
 
   function updateSetupFields() {
@@ -311,6 +312,8 @@ function initKahalaPage() {
 
   modeSelect.addEventListener("change", updateSetupFields);
   setupForm.addEventListener("submit", startGame);
+  byId("help-button").addEventListener("click", () => rulesDialog.showModal());
+  byId("close-rules-button").addEventListener("click", () => rulesDialog.close());
   byId("new-game-button").addEventListener("click", () => {
     game = null;
     livePanel.classList.add("is-hidden");
