@@ -6,3 +6,5 @@ Bug : On arrive pas a ajouter le grain dans le grebier Lorsque l'adversaire n'a 
 
 Au fil et à mésure que je reviendrai dans le code je ferai quele code puisse appliquer plus des règles du jeu original
 
+Dans la version web : il faudra corriger le sense dont les grains vons se placer,
+ - les grains se deplace de 1 vers 6 et non le contraire. 
